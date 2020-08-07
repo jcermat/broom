@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+then
+	echo "[-] Argument expected."
+fi
+
+if [[ -f $1 ]]
+then
+	echo "[*] Initiating Scan."
+	for i in $(cat $1)
+	do
+		IPDIRNAME=$(echo $i | sed "s/\./-/g")
+		echo "[*] Scanning ${i}..."
+		if [[ -d $IPDIRNAME ]]
+		then
+			cd $IPDIRNAME
+		else
+			mkdir $IPDIRNAME
+			cd $IPDIRNAME
+		fi
+		mkdir {nmap,ssh,ftp,src}
+		nmap -sCV -oA nmap/init $i > tmp &
+		cd ..
+		sleep 0.5
+	done
+	echo "[*] Scans are executing. Outputs are saved in their respective nmap folders."	
+	stty echo
+fi
