@@ -11,7 +11,7 @@ It is currently  a barebones tool, other features are would be added soon.
 ```
 ## Functions
 
-Courrently a simple Nmap automation script.
+Currently a simple Nmap automation script.
 
 ## Planned 
 
